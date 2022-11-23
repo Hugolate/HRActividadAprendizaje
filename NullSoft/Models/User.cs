@@ -10,7 +10,7 @@ namespace Models
     {
         public string number { get; }
         public string name { get; set; }
-        private List<PlayList>? allPlayLists { get; }
+        private List<Playlist>? allPlayLists { get; }
         private string password/*{get; set;}*/;
         private int userNumberSeed = 1;
 
@@ -22,7 +22,7 @@ namespace Models
             userNumberSeed++;
         }
 
-        public PlayList getPlayListByName(string name)
+        public Playlist getPlayListByName(string name)
         {
             UsersDAO uDao = new UsersDAO();
             foreach (var list in uDao.DeserializePlaylists(this))
@@ -37,7 +37,7 @@ namespace Models
         public void removePlaylist(string listName)
         {
             UsersDAO uDao = new UsersDAO();
-            List<PlayList> playLists = new List<PlayList>();
+            List<Playlist> playLists = new List<Playlist>();
             foreach (var list in playLists)
             {
                 if (listName == list.playListName)
@@ -48,7 +48,7 @@ namespace Models
             }
 
         }
-        public List<PlayList> getAllPlayList()
+        public List<Playlist> getAllPlayList()
         {
             UsersDAO uDao = new UsersDAO();
             return uDao.DeserializePlaylists(this);
