@@ -30,7 +30,7 @@ class UsersDAO
         }
     }
 
-    public List<Playlist> DeserializePlaylists(UsersDAO user)
+    public List<Playlist> DeserializePlaylists(User user)
     {
         
         List<User> listAccounts = Deserialize();
