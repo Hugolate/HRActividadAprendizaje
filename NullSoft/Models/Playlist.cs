@@ -6,13 +6,13 @@ using Models;
 
 namespace Models
 {
-    class PlayList
+    class Playlist
     {
         public string playListName { get; set; }
         public List<Song>? allSongs { get; }
         public Boolean privacity { get; set; }
 
-        public PlayList(string name, Boolean privacity)
+        public Playlist(string name, Boolean privacity)
         {
             this.playListName = name;
             ChangePrivacity(privacity);
