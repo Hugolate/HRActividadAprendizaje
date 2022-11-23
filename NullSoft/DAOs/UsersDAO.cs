@@ -19,14 +19,27 @@ class UsersDAO
         return new List<User>();
     }
 
-    public void SerializeUser(User user) 
+    public void SerializeUser(User user)
     {
-            List<User> listAccounts = Deserialize();
-            listAccounts.Add(user);
-            using (FileStream createStream = File.Create("Users.json"))
-            {
-                createStream.DisposeAsync();
-                File.WriteAllText("Users.json", JsonConvert.SerializeObject(listAccounts));
+        List<User> listAccounts = Deserialize();
+        listAccounts.Add(user);
+        using (FileStream createStream = File.Create("Users.json"))
+        {
+            createStream.DisposeAsync();
+            File.WriteAllText("Users.json", JsonConvert.SerializeObject(listAccounts));
+        }
+    }
+
+    public List<Playlist> DeserializePlaylists(UsersDAO user)
+    {
+        
+        List<User> listAccounts = Deserialize();
+        foreach (var account in listAccounts)
+        {
+            if(account == user){
+                return account.allPlaylists;
             }
+        }
+        return null;
     }
 }
