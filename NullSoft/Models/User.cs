@@ -1,8 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Daos;
+using Models;
 
-namespace NullSoft
+namespace Models
 {
     class User
     {
