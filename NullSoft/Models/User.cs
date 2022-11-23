@@ -10,7 +10,7 @@ namespace Models
     {
         public string number { get; }
         public string name { get; set; }
-        private List<Playlist>? allPlayLists { get; }
+        public List<Playlist>? allPlayLists { get; }
         private string password/*{get; set;}*/;
         private int userNumberSeed = 1;
 
