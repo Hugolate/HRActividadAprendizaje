@@ -150,7 +150,7 @@ namespace NullSoft
             return password;
         }
 
-        public void allMenu(){
+        public static void allMenu(){
             Boolean bucle = false;
             Menu menu = new Menu();
             while (!bucle)

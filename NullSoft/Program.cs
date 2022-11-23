@@ -7,8 +7,7 @@ namespace NullSoft
     {
         static void Main(string[] args)
         {
-            Menu menu = new Menu();
-            menu.allMenu();
+            Menu.allMenu();
         }
     }
 }
