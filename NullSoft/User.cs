@@ -22,19 +22,34 @@ namespace NullSoft
 
         public PlayList getPlayListByName(string name)
         {
+            UsersDAO uDao = new UsersDAO();
+            foreach (var list in uDao.DeserializePlaylists(this))
+            {
+                if (name == list.playListName)
+                {
+                    return list;
+                }
+            }
             return null;
         }
-
-        public void createPlayList(string listName, Boolean privacity)
+        public void removePlaylist(string listName)
         {
+            UsersDAO uDao = new UsersDAO();
+            List<PlayList> playLists = new List<PlayList>();
+            foreach (var list in playLists)
+            {
+                if (listName == list.playListName)
+                {
+                    playLists.Remove(list);
+                    Console.WriteLine(listName + " Deleted");
+                }
+            }
 
         }
-        public void removePlaylist(string listName, Boolean privacity)
+        public List<PlayList> getAllPlayList()
         {
-
-        }
-        public void getAllPlayList(string listName, Boolean privacity)
-        {
+            UsersDAO uDao = new UsersDAO();
+            return uDao.DeserializePlaylists(this);
 
         }
 
