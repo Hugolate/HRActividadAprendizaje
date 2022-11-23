@@ -1,45 +1,52 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-using NullSoft;
+using Models;
 using Newtonsoft.Json;
-class UsersDAO
+
+namespace Daos
 {
 
 
-    public List<User> Deserialize()
+    class UsersDAO
     {
 
-        string jsonString = File.ReadAllText("Users.json");
-        if (jsonString != "")
+
+        public List<User> Deserialize()
         {
-            return JsonConvert.DeserializeObject<List<User>>(jsonString);
+
+            string jsonString = File.ReadAllText("Users.json");
+            if (jsonString != "")
+            {
+                return JsonConvert.DeserializeObject<List<User>>(jsonString);
+            }
+
+            return new List<User>();
         }
 
-        return new List<User>();
-    }
-
-    public void SerializeUser(User user)
-    {
-        List<User> listAccounts = Deserialize();
-        listAccounts.Add(user);
-        using (FileStream createStream = File.Create("Users.json"))
+        public void SerializeUser(User user)
         {
-            createStream.DisposeAsync();
-            File.WriteAllText("Users.json", JsonConvert.SerializeObject(listAccounts));
-        }
-    }
-
-    public List<Playlist> DeserializePlaylists(User user)
-    {
-        
-        List<User> listAccounts = Deserialize();
-        foreach (var account in listAccounts)
-        {
-            if(account == user){
-                return account.allPlaylists;
+            List<User> listAccounts = Deserialize();
+            listAccounts.Add(user);
+            using (FileStream createStream = File.Create("Users.json"))
+            {
+                createStream.DisposeAsync();
+                File.WriteAllText("Users.json", JsonConvert.SerializeObject(listAccounts));
             }
         }
-        return null;
+
+        public List<Playlist> DeserializePlaylists(User user)
+        {
+
+            List<User> listAccounts = Deserialize();
+            foreach (var account in listAccounts)
+            {
+                if (account == user)
+                {
+                    return account.allPlaylists;
+                }
+            }
+            return null;
+        }
     }
 }
