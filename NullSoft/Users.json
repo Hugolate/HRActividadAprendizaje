@@ -1,1 +1,20 @@
-[{"number":0,"name":"eiafb","allPlayLists":null,"password":"aoiefu"},{"number":1,"name":"iabejf","allPlayLists":null,"password":"aeifuj"},{"number":2,"name":"fbie","allPlayLists":null,"password":"iafoen"}]
+[
+    {
+        "number": 0,
+        "name": "eiafb",
+        "allPlayLists": null,
+        "password": "aoiefu"
+    },
+    {
+        "number": 1,
+        "name": "iabejf",
+        "allPlayLists": null,
+        "password": "aeifuj"
+    },
+    {
+        "number": 2,
+        "name": "fbie",
+        "allPlayLists": null,
+        "password": "iafoen"
+    }
+]
