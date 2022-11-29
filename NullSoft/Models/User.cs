@@ -2,24 +2,28 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using Daos;
+using Newtonsoft.Json;
 using Models;
 
 namespace Models
 {
     class User
     {
-        public string number { get; }
+        public int number { get; set;}
         public string name { get; set; }
         public List<Playlist>? allPlayLists { get; }
-        private string password/*{get; set;}*/;
-        private int userNumberSeed = 1;
+        public string password{get; set;}
 
         public User(string name, string password)
         {
             this.name = name;
             this.password = password;
-            this.number = userNumberSeed.ToString();
-            userNumberSeed++;
+        }
+        [JsonConstructor]
+        public User(string name, string password, int number){
+            this.name = name;
+            this.password = password;
+            this.number = number;
         }
 
         public Playlist getPlayListByName(string name)

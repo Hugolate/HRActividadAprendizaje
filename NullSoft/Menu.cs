@@ -1,5 +1,7 @@
 using System;
 using System.Text;
+using Daos;
+using Models;
 
 namespace NullSoft
 {
@@ -85,7 +87,7 @@ namespace NullSoft
             Console.WriteLine("|    ________     |");
             Console.WriteLine("|_________________|");
             Console.WriteLine("Write your password: ");
-            writePassw();
+            String password = writePassw();
             Console.WriteLine(" ");
             this.menu.AppendLine(" _________________");
             this.menu.AppendLine("|  Register menu  |");
@@ -97,6 +99,8 @@ namespace NullSoft
             this.menu.AppendLine("|    ********     |");
             this.menu.AppendLine("|_________________|");
             this.menu.AppendLine("   ");
+            UsersDAO userDAO = new UsersDAO();
+            userDAO.SerializeUser(new User(username, password));
             this.menu.AppendLine("Register succesfully");
             return this.menu;
         }
@@ -107,7 +111,7 @@ namespace NullSoft
             Console.WriteLine("Username: ");
             String username = Console.ReadLine();
             Console.WriteLine("Password: ");
-            writePassw();
+            String password = writePassw();
             Console.WriteLine(" ");
             Console.WriteLine(" _________________");
             Console.WriteLine("|   Log-in menu   |");
@@ -121,6 +125,14 @@ namespace NullSoft
             Thread.Sleep(1500);
             Console.WriteLine("|_________________|");
             Console.WriteLine("   ");
+            UsersDAO userDAO = new UsersDAO();
+            foreach (var item in userDAO.Deserialize())
+            {
+                if (item.name == username && item.password == password)
+                {
+                    String name = item.name;
+                }
+            }
             Console.WriteLine($"Welcome, {username}");
             return this.menu;
         }
@@ -150,7 +162,8 @@ namespace NullSoft
             return password;
         }
 
-        public static void allMenu(){
+        public static void allMenu()
+        {
             Boolean bucle = false;
             Menu menu = new Menu();
             while (!bucle)

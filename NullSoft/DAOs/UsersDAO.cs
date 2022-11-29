@@ -11,7 +11,6 @@ namespace Daos
     class UsersDAO
     {
 
-
         public List<User> Deserialize()
         {
 
@@ -27,6 +26,7 @@ namespace Daos
         public void SerializeUser(User user)
         {
             List<User> listAccounts = Deserialize();
+            user.number = getNextNumber(user);
             listAccounts.Add(user);
             using (FileStream createStream = File.Create("Users.json"))
             {
@@ -47,6 +47,20 @@ namespace Daos
                 }
             }
             return null;
+        }
+
+        public int getNextNumber(User user)
+        {
+            List<User> listAccounts = Deserialize();
+            int nextNumber = 0;
+            foreach (var item in listAccounts)
+            {
+                if (nextNumber <= item.number)
+                {
+                    nextNumber = item.number + 1;
+                }
+            }
+            return nextNumber;
         }
     }
 }
