@@ -14,7 +14,7 @@ namespace Daos
         public List<User> Deserialize()
         {
 
-            string jsonString = File.ReadAllText("Users.json");
+            string jsonString = File.ReadAllText("DDBB/Users.json");
             if (jsonString != "")
             {
                 return JsonConvert.DeserializeObject<List<User>>(jsonString);
@@ -36,10 +36,10 @@ namespace Daos
                 }
             }
             listAccounts.Add(user);
-            using (FileStream createStream = File.Create("Users.json"))
+            using (FileStream createStream = File.Create("DDBB/Users.json"))
             {
                 createStream.DisposeAsync();
-                File.WriteAllText("Users.json", JsonConvert.SerializeObject(listAccounts));
+                File.WriteAllText("DDBB/Users.json", JsonConvert.SerializeObject(listAccounts));
             }
         }
 
