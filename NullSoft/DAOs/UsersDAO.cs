@@ -43,7 +43,7 @@ namespace Daos
             {
                 if (account == user)
                 {
-                    return account.allPlaylists;
+                    return account.allPlayLists;
                 }
             }
             return null;
