@@ -9,6 +9,8 @@ namespace NullSoft
     class Menu
     {
         public StringBuilder menu { get; set; }
+        public static User user;
+        private static UsersDAO userDAO = new UsersDAO();
         public Menu()
         {
             Console.WriteLine("Welcome to PlaySoft");
@@ -99,13 +101,12 @@ namespace NullSoft
             this.menu.AppendLine("|    ********     |");
             this.menu.AppendLine("|_________________|");
             this.menu.AppendLine("   ");
-            UsersDAO userDAO = new UsersDAO();
             userDAO.SerializeUser(new User(username, password));
             this.menu.AppendLine("Register succesfully");
             return this.menu;
         }
 
-        public StringBuilder showLogin()
+        public User showLogin()
         {
             menu = new StringBuilder();
             Console.WriteLine("Username: ");
@@ -125,16 +126,16 @@ namespace NullSoft
             Thread.Sleep(1500);
             Console.WriteLine("|_________________|");
             Console.WriteLine("   ");
-            UsersDAO userDAO = new UsersDAO();
+
             foreach (var item in userDAO.Deserialize())
             {
                 if (item.name == username && item.password == password)
                 {
-                    String name = item.name;
+                    user = item;
                 }
             }
             Console.WriteLine($"Welcome, {username}");
-            return this.menu;
+            return user;
         }
 
         public String writePassw()
@@ -191,17 +192,60 @@ namespace NullSoft
                                 case 1:
                                     break;
                                 case 2:
+                                    if (userDAO.DeserializePlaylists(user) != null)
+                                    {
+                                        Console.WriteLine("Playlist name:");
+                                        string plName = Console.ReadLine();
+                                        Console.WriteLine("Playlist privacity(1.public 2.private):");
+                                        int privacity = 0;
+                                        privacity = menu.bucleMenu(1, 2, privacity);
+                                        Boolean priv;
+                                        if (privacity == 1)
+                                        {
+                                            priv = true;
+                                        }
+                                        else
+                                        {
+                                            priv = false;
+                                        }
+                                        user.allPlayLists = userDAO.DeserializePlaylists(user);
+                                        user.allPlayLists.Add(new Playlist(plName, priv));
+
+                                    }
                                     break;
                                 case 3:
+                                    Console.WriteLine("Playlist to remove:");
+                                    string rmList = Console.ReadLine();
+                                    user.removePlaylist(rmList);
+
                                     break;
                                 case 4:
+                                    Console.WriteLine("Playlist name:");
+                                    string listName = Console.ReadLine();
+                                    Playlist list = user.getPlayListByName(listName);
+                                    if(list == null)
+                                    {
+                                        Console.WriteLine("This playlist don't exist");
+                                    }else
+                                    {
+                                        Console.WriteLine(list.allSongs + ", " + list.privacity);
+                                    }
+                                    
                                     break;
                                 case 5:
+                                    List<Playlist> playlists = userDAO.DeserializePlaylists(user);
+                                    foreach (var item in playlists)
+                                    {
+                                        Console.WriteLine(item.playListName + ", " + item.allSongs);
+                                    }
                                     break;
                                 case 6:
                                     bucleDos = true;
                                     break;
                             }
+                            //Serialize user
+                            userDAO.SerializeUser(user);
+
                         }
                         break;
                     case 3:

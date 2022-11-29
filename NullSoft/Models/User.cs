@@ -11,19 +11,21 @@ namespace Models
     {
         public int number { get; set;}
         public string name { get; set; }
-        public List<Playlist>? allPlayLists { get; }
+        public List<Playlist>? allPlayLists { get; set; }
         public string password{get; set;}
 
         public User(string name, string password)
         {
             this.name = name;
             this.password = password;
+            allPlayLists = new List<Playlist>();
         }
         [JsonConstructor]
         public User(string name, string password, int number){
             this.name = name;
             this.password = password;
             this.number = number;
+            allPlayLists = new List<Playlist>();
         }
 
         public Playlist getPlayListByName(string name)
@@ -41,23 +43,18 @@ namespace Models
         public void removePlaylist(string listName)
         {
             UsersDAO uDao = new UsersDAO();
-            List<Playlist> playLists = new List<Playlist>();
-            foreach (var list in playLists)
+            allPlayLists = uDao.DeserializePlaylists(this);
+            
+            foreach (var list in allPlayLists)
             {
                 if (listName == list.playListName)
                 {
-                    playLists.Remove(list);
+                    allPlayLists.Remove(list);
                     Console.WriteLine(listName + " Deleted");
+                    break;
                 }
             }
 
         }
-        public List<Playlist> getAllPlayList()
-        {
-            UsersDAO uDao = new UsersDAO();
-            return uDao.DeserializePlaylists(this);
-
-        }
-
     }
 }

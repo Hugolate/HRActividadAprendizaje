@@ -27,6 +27,14 @@ namespace Daos
         {
             List<User> listAccounts = Deserialize();
             user.number = getNextNumber(user);
+            foreach (var item in listAccounts)
+            {
+                if (item.number == item.number)
+                {
+                    listAccounts.Remove(item);
+                    break;
+                }
+            }
             listAccounts.Add(user);
             using (FileStream createStream = File.Create("Users.json"))
             {
@@ -41,7 +49,7 @@ namespace Daos
             List<User> listAccounts = Deserialize();
             foreach (var account in listAccounts)
             {
-                if (account == user)
+                if (account.number == user.number)
                 {
                     return account.allPlayLists;
                 }
