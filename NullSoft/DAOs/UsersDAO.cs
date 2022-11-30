@@ -26,15 +26,18 @@ namespace Daos
         public void SerializeUser(User user)
         {
             List<User> listAccounts = Deserialize();
-            user.number = getNextNumber(user);
+            listAccounts.Count();
+
             foreach (var item in listAccounts)
             {
-                if (item.number == item.number)
+                if (item.number == user.number)
                 {
+                    user.number = getNextNumber(user);
                     listAccounts.Remove(item);
                     break;
                 }
             }
+
             listAccounts.Add(user);
             using (FileStream createStream = File.Create("DDBB/Users.json"))
             {

@@ -14,6 +14,8 @@ namespace Models
         public List<Playlist>? allPlayLists { get; set; }
         public string password{get; set;}
 
+        private UsersDAO dao = new UsersDAO();
+
         public User(string name, string password)
         {
             this.name = name;
