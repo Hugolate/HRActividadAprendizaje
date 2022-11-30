@@ -26,15 +26,34 @@ namespace Daos
         public void SerializeUser(User user)
         {
             List<User> listAccounts = Deserialize();
-            listAccounts.Count();
-
-            foreach (var item in listAccounts)
+            int contador = 0;
+            int numMax = 0;
+            for (int i = 0; i < listAccounts.Count(); i++)
             {
-                if (item.number == user.number)
+                if (listAccounts[i].name == user.name)
                 {
-                    user.number = getNextNumber(user);
-                    listAccounts.Remove(item);
-                    break;
+
+                }
+                else
+                {
+                    contador++;
+                }
+                if (numMax < listAccounts[i].number)
+                {
+                    numMax = listAccounts[i].number;
+                }
+            }
+
+            if (contador == listAccounts.Count())
+            {
+                user.number = numMax + 1;
+            }
+
+            for (int i = 0; i < listAccounts.Count(); i++)
+            {
+                if (listAccounts[i].name == user.name)
+                {
+                    listAccounts.Remove(listAccounts[i]);
                 }
             }
 
@@ -60,18 +79,6 @@ namespace Daos
             return null;
         }
 
-        public int getNextNumber(User user)
-        {
-            List<User> listAccounts = Deserialize();
-            int nextNumber = 0;
-            foreach (var item in listAccounts)
-            {
-                if (nextNumber <= item.number)
-                {
-                    nextNumber = item.number + 1;
-                }
-            }
-            return nextNumber;
-        }
+
     }
 }
