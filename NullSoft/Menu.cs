@@ -202,6 +202,7 @@ namespace NullSoft
                                     case 1:
                                         break;
                                     case 2:
+                                    //Crear playlist
                                         if (userDAO.DeserializePlaylists(user) != null)
                                         {
                                             Console.WriteLine("Playlist name:");
@@ -223,12 +224,14 @@ namespace NullSoft
                                         }
                                         break;
                                     case 3:
+                                    //Borrar playlist
                                         Console.WriteLine("Playlist to remove:");
                                         string rmList = Console.ReadLine();
                                         user.removePlaylist(rmList);
 
                                         break;
                                     case 4:
+                                    //Buscar playlist
                                         Console.WriteLine("Playlist name:");
                                         string listName = Console.ReadLine();
                                         Playlist list = user.getPlayListByName(listName);
