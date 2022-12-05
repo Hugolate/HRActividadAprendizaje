@@ -14,24 +14,45 @@ namespace Models
 
         public Playlist(string name, Boolean privacity)
         {
+            allSongs = new List<Song>();
             this.playListName = name;
             ChangePrivacity(privacity);
         }
 
         public Song getSongByName(string name)
         {
-            
+
             return null;
         }
 
-        public void AddSong(Song newSong)
+        public void AddSong(string songName)
         {
+            SongsDao DAO = new SongsDao();
 
+            foreach (var song in DAO.Deserialize())
+            {
+                if (song.songName == songName)
+                {
+                    allSongs.Add(song);
+                    break;
+                }
+            }
         }
 
-        public void RemoveSong(Song songToRemove)
+        public void RemoveSong(string songToRemove)
         {
-
+            SongsDao DAO = new SongsDao();
+            if (allSongs != null)
+            {
+                foreach (var song in allSongs)
+                {
+                    if (song.songName == songToRemove)
+                    {
+                        allSongs.Remove(song);
+                        break;
+                    }
+                }
+            }
         }
 
         public void ChangePrivacity(Boolean boo)

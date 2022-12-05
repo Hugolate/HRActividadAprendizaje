@@ -45,7 +45,25 @@ namespace NullSoft
             this.menu.AppendLine("| 3.Remove Playlist|");
             this.menu.AppendLine("| 4.Search Playlist|");
             this.menu.AppendLine("| 5.View Playlist  |");
-            this.menu.AppendLine("| 6.Exit           |");
+            this.menu.AppendLine("| 6.Modify Playlist|");
+            this.menu.AppendLine("| 7.Exit           |");
+            this.menu.AppendLine("|__________________|");
+            return this.menu;
+
+        }
+
+        public StringBuilder showPlaylistOptions(Playlist playlist)
+        {
+            menu = new StringBuilder();
+            this.menu.AppendLine(" __________________ ");
+            this.menu.AppendLine("|       menu       |");
+            this.menu.AppendLine("|__________________|");
+            this.menu.AppendLine("|                  |");
+            this.menu.AppendLine("| 1.Add song       |");
+            this.menu.AppendLine("| 2.Remove song    |");
+            this.menu.AppendLine("| 3.List all songs |");
+            this.menu.AppendLine("| 4.Change privacy |");
+            this.menu.AppendLine("| 5.Exit           |");
             this.menu.AppendLine("|__________________|");
             return this.menu;
 
@@ -171,6 +189,29 @@ namespace NullSoft
             return password;
         }
 
+        public void addPLaylist()
+        {
+            if (userDAO.DeserializePlaylists(user) != null)
+            {
+                Console.WriteLine("Playlist name:");
+                string plName = Console.ReadLine();
+                Console.WriteLine("Playlist privacity(1.public 2.private):");
+                int privacity = 0;
+                privacity = bucleMenu(1, 2, privacity);
+                Boolean priv;
+                if (privacity == 1)
+                {
+                    priv = true;
+                }
+                else
+                {
+                    priv = false;
+                }
+                user.allPlayLists = userDAO.DeserializePlaylists(user);
+                user.allPlayLists.Add(new Playlist(plName, priv));
+            }
+        }
+
         public static void allMenu()
         {
             Boolean bucle = false;
@@ -187,7 +228,7 @@ namespace NullSoft
                         Console.WriteLine(menu.RegisterMenu());
                         break;
                     case 2:
-                    User user = menu.showLogin();
+                        User user = menu.showLogin();
                         if (user != null)
                         {
                             Boolean bucleDos = false;
@@ -196,42 +237,24 @@ namespace NullSoft
                                 Thread.Sleep(1500);
                                 Console.WriteLine(menu.showUserMenu());
                                 opcion = 0;
-                                opcion = menu.bucleMenu(1, 6, opcion);
+                                opcion = menu.bucleMenu(1, 7, opcion);
                                 switch (opcion)
                                 {
                                     case 1:
                                         break;
                                     case 2:
-                                    //Crear playlist
-                                        if (userDAO.DeserializePlaylists(user) != null)
-                                        {
-                                            Console.WriteLine("Playlist name:");
-                                            string plName = Console.ReadLine();
-                                            Console.WriteLine("Playlist privacity(1.public 2.private):");
-                                            int privacity = 0;
-                                            privacity = menu.bucleMenu(1, 2, privacity);
-                                            Boolean priv;
-                                            if (privacity == 1)
-                                            {
-                                                priv = true;
-                                            }
-                                            else
-                                            {
-                                                priv = false;
-                                            }
-                                            user.allPlayLists = userDAO.DeserializePlaylists(user);
-                                            user.allPlayLists.Add(new Playlist(plName, priv));
-                                        }
+                                        //Crear playlist
+                                        menu.addPLaylist();
                                         break;
                                     case 3:
-                                    //Borrar playlist
+                                        //Borrar playlist
                                         Console.WriteLine("Playlist to remove:");
                                         string rmList = Console.ReadLine();
                                         user.removePlaylist(rmList);
 
                                         break;
                                     case 4:
-                                    //Buscar playlist
+                                        //Buscar playlist
                                         Console.WriteLine("Playlist name:");
                                         string listName = Console.ReadLine();
                                         Playlist list = user.getPlayListByName(listName);
@@ -246,13 +269,91 @@ namespace NullSoft
 
                                         break;
                                     case 5:
+                                        //ver todas las playlist
                                         List<Playlist> playlists = userDAO.DeserializePlaylists(user);
                                         foreach (var item in playlists)
                                         {
-                                            Console.WriteLine(item.playListName + ", " + item.allSongs);
+                                            Console.WriteLine(item.playListName);
                                         }
                                         break;
                                     case 6:
+                                        //Modificar una playlist
+                                        Console.WriteLine("Playlist name:");
+                                        listName = Console.ReadLine();
+                                        Boolean exist = false;
+                                        List<Playlist> allUserPlaylists = userDAO.DeserializePlaylists(user);
+                                        foreach (var userPLaylist in allUserPlaylists)
+                                        {
+                                            if (listName == userPLaylist.playListName)
+                                            {
+
+                                                exist = true;
+
+                                                Boolean bucleTres = false;
+                                                while (!bucleTres)
+                                                {
+                                                    Thread.Sleep(1500);
+                                                    Console.WriteLine(menu.showPlaylistOptions(userPLaylist));
+                                                    opcion = 0;
+                                                    opcion = menu.bucleMenu(1, 5, opcion);
+                                                    switch (opcion)
+                                                    {
+                                                        case 1:
+                                                            //Añadir cancion a playlist
+                                                            Console.WriteLine("Song name:");
+                                                            String songName = Console.ReadLine();
+                                                            userPLaylist.AddSong(songName);
+                                                            user.removePlaylist(userPLaylist.playListName);
+                                                            user.allPlayLists.Add(userPLaylist);
+                                                            break;
+                                                        case 2:
+                                                            //Borrar cancion de playlist
+                                                            if (user.allPlayLists != null)
+                                                            {
+
+                                                                Console.WriteLine("Song name:");
+                                                                songName = Console.ReadLine();
+                                                                userPLaylist.RemoveSong(songName);
+                                                                user.removePlaylist(userPLaylist.playListName);
+                                                                user.allPlayLists.Add(userPLaylist);
+                                                            }
+                                                            break;
+                                                        case 3:
+                                                            if (userPLaylist.allSongs != null)
+                                                            {
+                                                                foreach (var song in userPLaylist.allSongs)
+                                                                {
+                                                                    Console.WriteLine(song.songName);
+                                                                }
+                                                            }
+                                                            break;
+                                                        case 4:
+                                                            Console.WriteLine("Playlist privacity(1.public 2.private):");
+                                                            string privacy = Console.ReadLine();
+                                                            if (privacy == "1")
+                                                            {
+                                                                userPLaylist.ChangePrivacity(true);
+                                                            }
+                                                            else
+                                                            {
+                                                                userPLaylist.ChangePrivacity(true);
+                                                            }
+                                                            break;
+                                                        case 5:
+                                                            bucleTres = true;
+                                                            break;
+                                                    }
+                                                    userDAO.SerializeUser(user);
+                                                }
+                                                if (!exist)
+                                                {
+                                                    Console.WriteLine("This playlist don't exist");
+                                                }
+                                            }
+                                        }
+
+                                        break;
+                                    case 7:
                                         bucleDos = true;
                                         break;
                                 }

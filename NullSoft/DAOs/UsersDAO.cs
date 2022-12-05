@@ -11,6 +11,7 @@ namespace Daos
     class UsersDAO
     {
 
+        private static string Path = "DDBB/Users.json";
         public List<User> Deserialize()
         {
 
@@ -58,10 +59,10 @@ namespace Daos
             }
 
             listAccounts.Add(user);
-            using (FileStream createStream = File.Create("DDBB/Users.json"))
+            using (FileStream createStream = File.Create(Path))
             {
                 createStream.DisposeAsync();
-                File.WriteAllText("DDBB/Users.json", JsonConvert.SerializeObject(listAccounts));
+                File.WriteAllText(Path, JsonConvert.SerializeObject(listAccounts));
             }
         }
 

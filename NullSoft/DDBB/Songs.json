@@ -1,52 +1,61 @@
-[
-    {
+[{
         "songName": "Nocturne Op.9 No.2",
         "duration": 4.30,
-        "publicationDate": "5/7/1831"
+        "publicationDate": "1831-06-05 12:00:00",
+        "songID": "1"
     },
     {
         "songName": "Invierno",
         "duration": 9.25,
-        "publicationDate": "12/4/1723"
+        "publicationDate": "1723-04-12 12:00:00",
+        "songID": "2"
     },
     {
         "songName": "Verano",
         "duration": 11,
-        "publicationDate": "9/11/1831"
+        "publicationDate": "1831-11-09 12:00:00",
+        "songID": "3"
     },
     {
         "songName": "Wrong Note",
         "duration": 3.56,
-        "publicationDate": "4/6/1837"
+        "publicationDate": "1837-06-04 12:00:00",
+        "songID": "4"
     },
     {
         "songName": "Winter Wind",
         "duration": 4.09,
-        "publicationDate": "19/2/1836"
+        "publicationDate": "1836-02-19 12:00:00",
+        "songID": "5"
     },
     {
         "songName": "Waterfall",
         "duration": 2.22,
-        "publicationDate": "25/11/1829"
+        "publicationDate": "1829-11-25 12:00:00",
+        "songID": "6"
     },
     {
         "songName": "Ballade No.1",
         "duration": 9.25,
-        "publicationDate": "27/10/1835"
+        "publicationDate": "1835-10-27 12:00:00",
+        "songID": "7"
     },
     {
         "songName": "La Campanella",
         "duration": 5.18,
-        "publicationDate": "9/5/1838"
+        "publicationDate": "1838-05-09 12:00:00",
+        "songID": "8"
     },
     {
         "songName": "Etude K265",
         "duration": 5.03,
-        "publicationDate": "9/5/1781"
+        "publicationDate": "1781-05-09 12:00:00",
+        "songID": "9"
     },
     {
         "songName": "The Coconut Song",
         "duration": 3.35,
-        "publicationDate": "15/9/2010"
+        "publicationDate": "2010-09-15 12:00:00",
+        "songID": "10"
     }
 ]
