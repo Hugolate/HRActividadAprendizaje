@@ -12,4 +12,4 @@ RUN dotnet publish -c Release -o out
 
 EXPOSE 80
 
-ENTRYPOINT ["dotnet", "out/MyApp.dll"]  
+ENTRYPOINT ["dotnet", "out/NullSoft.dll"]  
