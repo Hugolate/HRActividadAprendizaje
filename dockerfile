@@ -1,15 +1,16 @@
-FROM mcr.microsoft.com/dotnet/sdk:6.0
 
-ENV AppName=PlaySoft
+FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
+WORKDIR /src
 
-WORKDIR /NullSoft
 
-COPY . .
-
+COPY NullSoft/. .
 RUN dotnet restore
 
-RUN dotnet publish -c Release -o out
+# RUN dotnet build "NullSoft.csproj" -c Release -o /build
 
-EXPOSE 80
+RUN dotnet publish -c Release -o /app --no-restore
 
-ENTRYPOINT ["dotnet", "out/NullSoft.dll"]  
+FROM mcr.microsoft.com/dotnet/aspnet:6.0
+WORKDIR /app
+COPY --from=build /app ./
+ENTRYPOINT ["dotnet", "NullSoft.dll"]  
