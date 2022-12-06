@@ -10,6 +10,9 @@ RUN dotnet restore
 
 RUN dotnet publish -c Release -o /app --no-restore
 
+ENV APP_NAME = PlaySoft
+
+EXPOSE 4575
 FROM mcr.microsoft.com/dotnet/aspnet:6.0
 WORKDIR /app
 COPY --from=build /app ./

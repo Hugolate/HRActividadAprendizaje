@@ -13,7 +13,8 @@ namespace NullSoft
         private static UsersDAO userDAO = new UsersDAO();
         public Menu()
         {
-            Console.WriteLine("Welcome to PlaySoft");
+            var a = Environment.GetEnvironmentVariable("APP_NAME");
+            Console.WriteLine(Environment.GetEnvironmentVariable("APP_NAME"));
             menu = new StringBuilder();
         }
 
