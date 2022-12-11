@@ -1,4 +1,3 @@
-
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
 
@@ -12,8 +11,8 @@ RUN dotnet publish -c Release -o /app --no-restore
 
 ENV APP_NAME = PlaySoft
 
-EXPOSE 4575
+#EXPOSE 4575 - 5945
 FROM mcr.microsoft.com/dotnet/aspnet:6.0
 WORKDIR /app
 COPY --from=build /app ./
-ENTRYPOINT ["dotnet", "NullSoft.dll"]  
+ENTRYPOINT [ "dotnet", "NullSoft.dll" ]
