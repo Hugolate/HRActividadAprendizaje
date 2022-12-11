@@ -52,9 +52,11 @@ namespace Models
                 if (listName == list.playListName)
                 {
                     allPlayLists.Remove(list);
-                    break;
+                    Console.WriteLine("Playlist deleted");
+                    return;
                 }
             }
+            Console.WriteLine("Playlist not exist");
 
         }
     }

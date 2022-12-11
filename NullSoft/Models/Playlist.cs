@@ -34,9 +34,11 @@ namespace Models
                 if (song.songName == songName)
                 {
                     allSongs.Add(song);
-                    break;
+                    Console.WriteLine("Song added");
+                    return;
                 }
             }
+            Console.WriteLine("This song doesn't exist");
         }
 
         public void RemoveSong(string songToRemove)
@@ -49,9 +51,11 @@ namespace Models
                     if (song.songName == songToRemove)
                     {
                         allSongs.Remove(song);
-                        break;
+                        Console.WriteLine("Song deleted");
+                        return;
                     }
                 }
+                Console.WriteLine("This song is not in the playlist");
             }
         }
 

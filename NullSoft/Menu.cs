@@ -254,7 +254,6 @@ namespace NullSoft
                                         Console.WriteLine("Playlist to remove:");
                                         string rmList = Console.ReadLine();
                                         user.removePlaylist(rmList);
-                                        Console.WriteLine("Playlist deleted");
                                         break;
                                     case 3:
                                         //Buscar playlist
@@ -267,7 +266,7 @@ namespace NullSoft
                                         }
                                         else
                                         {
-                                            Console.WriteLine(list.allSongs + ", " + list.privacity);
+                                            Console.WriteLine("This playlist exists :) ");
                                         }
 
                                         break;
@@ -308,7 +307,7 @@ namespace NullSoft
                                                             userPLaylist.AddSong(songName);
                                                             user.removePlaylist(userPLaylist.playListName);
                                                             user.allPlayLists.Add(userPLaylist);
-                                                            Console.WriteLine("Song added");
+                                                            
                                                             break;
                                                         case 2:
                                                             //Borrar cancion de playlist
@@ -320,7 +319,6 @@ namespace NullSoft
                                                                 userPLaylist.RemoveSong(songName);
                                                                 user.removePlaylist(userPLaylist.playListName);
                                                                 user.allPlayLists.Add(userPLaylist);
-                                                                Console.WriteLine("Song deleted");
                                                             }
                                                             break;
                                                         case 3:
