@@ -5,16 +5,20 @@ using Models;
 
 namespace NullSoft
 {
+    
 
     class Menu
     {
+        
         public StringBuilder menu { get; set; }
         public static User user;
         private static UsersDAO userDAO = new UsersDAO();
+
+        
         public Menu()
         {
-            var a = Environment.GetEnvironmentVariable("APP_NAME");
-            Console.WriteLine(Environment.GetEnvironmentVariable("APP_NAME"));
+            var a = Environment.GetEnvironmentVariable("NAME");
+            Console.WriteLine(Environment.GetEnvironmentVariable("NAME"));
             menu = new StringBuilder();
         }
 
