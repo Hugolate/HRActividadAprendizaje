@@ -41,13 +41,12 @@ namespace NullSoft
             this.menu.AppendLine("|       Menu       |");
             this.menu.AppendLine("|__________________|");
             this.menu.AppendLine("|                  |");
-            this.menu.AppendLine("| 1.Search song    |");
-            this.menu.AppendLine("| 2.Create Playlist|");
-            this.menu.AppendLine("| 3.Remove Playlist|");
-            this.menu.AppendLine("| 4.Search Playlist|");
-            this.menu.AppendLine("| 5.View Playlist  |");
-            this.menu.AppendLine("| 6.Modify Playlist|");
-            this.menu.AppendLine("| 7.Exit           |");
+            this.menu.AppendLine("| 1.Create Playlist|");
+            this.menu.AppendLine("| 2.Remove Playlist|");
+            this.menu.AppendLine("| 3.Search Playlist|");
+            this.menu.AppendLine("| 4.View Playlist  |");
+            this.menu.AppendLine("| 5.Modify Playlist|");
+            this.menu.AppendLine("| 6.Exit           |");
             this.menu.AppendLine("|__________________|");
             return this.menu;
 
@@ -238,23 +237,22 @@ namespace NullSoft
                                 Thread.Sleep(1500);
                                 Console.WriteLine(menu.showUserMenu());
                                 opcion = 0;
-                                opcion = menu.bucleMenu(1, 7, opcion);
+                                opcion = menu.bucleMenu(1, 6, opcion);
                                 switch (opcion)
                                 {
                                     case 1:
-                                        break;
-                                    case 2:
                                         //Crear playlist
                                         menu.addPLaylist();
+                                        Console.WriteLine("Playlist created");
                                         break;
-                                    case 3:
+                                    case 2:
                                         //Borrar playlist
                                         Console.WriteLine("Playlist to remove:");
                                         string rmList = Console.ReadLine();
                                         user.removePlaylist(rmList);
-
+                                        Console.WriteLine("Playlist deleted");
                                         break;
-                                    case 4:
+                                    case 3:
                                         //Buscar playlist
                                         Console.WriteLine("Playlist name:");
                                         string listName = Console.ReadLine();
@@ -269,7 +267,7 @@ namespace NullSoft
                                         }
 
                                         break;
-                                    case 5:
+                                    case 4:
                                         //ver todas las playlist
                                         List<Playlist> playlists = userDAO.DeserializePlaylists(user);
                                         foreach (var item in playlists)
@@ -277,7 +275,7 @@ namespace NullSoft
                                             Console.WriteLine(item.playListName);
                                         }
                                         break;
-                                    case 6:
+                                    case 5:
                                         //Modificar una playlist
                                         Console.WriteLine("Playlist name:");
                                         listName = Console.ReadLine();
@@ -306,6 +304,7 @@ namespace NullSoft
                                                             userPLaylist.AddSong(songName);
                                                             user.removePlaylist(userPLaylist.playListName);
                                                             user.allPlayLists.Add(userPLaylist);
+                                                            Console.WriteLine("Song added");
                                                             break;
                                                         case 2:
                                                             //Borrar cancion de playlist
@@ -317,6 +316,7 @@ namespace NullSoft
                                                                 userPLaylist.RemoveSong(songName);
                                                                 user.removePlaylist(userPLaylist.playListName);
                                                                 user.allPlayLists.Add(userPLaylist);
+                                                                Console.WriteLine("Song deleted");
                                                             }
                                                             break;
                                                         case 3:
@@ -339,6 +339,7 @@ namespace NullSoft
                                                             {
                                                                 userPLaylist.ChangePrivacity(true);
                                                             }
+                                                            Console.WriteLine("Privacy changed");
                                                             break;
                                                         case 5:
                                                             bucleTres = true;
@@ -354,7 +355,7 @@ namespace NullSoft
                                         }
 
                                         break;
-                                    case 7:
+                                    case 6:
                                         bucleDos = true;
                                         break;
                                 }
