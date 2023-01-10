@@ -5,16 +5,16 @@ using Models;
 
 namespace NullSoft
 {
-    
+
 
     class Menu
     {
-        
+
         public StringBuilder menu { get; set; }
         public static User user;
         private static UsersDAO userDAO = new UsersDAO();
 
-        
+
         public Menu()
         {
             var a = Environment.GetEnvironmentVariable("NAME");
@@ -75,15 +75,23 @@ namespace NullSoft
 
         public int bucleMenu(int minimo, int maximo, int opcion)
         {
-            while (opcion < minimo || opcion > maximo)
+            try
             {
-                opcion = Convert.ToInt32(Console.ReadLine());
-                if (opcion < minimo || opcion > maximo)
+                while (opcion < minimo || opcion > maximo)
                 {
-                    Console.WriteLine("Invalid option");
+                    opcion = Convert.ToInt32(Console.ReadLine());
+                    if (opcion < minimo || opcion > maximo)
+                    {
+                        Console.WriteLine("Invalid option");
+                    }
                 }
+                return opcion;
             }
-            return opcion;
+            catch (Exception e)
+            {
+                Console.WriteLine("Error: "+ e.Message);
+            }
+            return 0;
         }
 
         public StringBuilder RegisterMenu()
@@ -201,7 +209,14 @@ namespace NullSoft
                 string plName = Console.ReadLine();
                 Console.WriteLine("Playlist privacity(1.public 2.private):");
                 int privacity = 0;
-                privacity = bucleMenu(1, 2, privacity);
+                try
+                {
+                    privacity = bucleMenu(1, 2, privacity);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("Error: " + e.Message);
+                }
                 Boolean priv;
                 if (privacity == 1)
                 {
@@ -307,7 +322,7 @@ namespace NullSoft
                                                             userPLaylist.AddSong(songName);
                                                             user.removePlaylist(userPLaylist.playListName);
                                                             user.allPlayLists.Add(userPLaylist);
-                                                            
+
                                                             break;
                                                         case 2:
                                                             //Borrar cancion de playlist
