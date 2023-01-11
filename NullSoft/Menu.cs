@@ -2,6 +2,8 @@ using System;
 using System.Text;
 using Daos;
 using Models;
+using Spectre.Console;
+
 
 namespace NullSoft
 {
@@ -20,38 +22,62 @@ namespace NullSoft
             var a = Environment.GetEnvironmentVariable("NAME");
             Console.WriteLine(Environment.GetEnvironmentVariable("NAME"));
             menu = new StringBuilder();
+            /*
+            try
+            {
+                if (Environment.GetEnvironmentVariable("LANGUAGE").Equals("en"))
+                {
+                    Menu.allMenu();
+                }
+                else
+                {
+                    Console.WriteLine("español");
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            */
+
         }
 
         public StringBuilder showMainMenu()
         {
-            menu = new StringBuilder();
-            this.menu.AppendLine(" ");
-            this.menu.AppendLine(" __________________ ");
-            this.menu.AppendLine("|       Menu       |");
-            this.menu.AppendLine("|__________________|");
-            this.menu.AppendLine("|                  |");
-            this.menu.AppendLine("|     1.Sign Up    |");
-            this.menu.AppendLine("|     2.Sign In    |");
-            this.menu.AppendLine("|     3.Exit       |");
-            this.menu.AppendLine("|__________________|");
-            this.menu.AppendLine(" ");
+            var table = new Table();
+            table.Border = TableBorder.HeavyHead;
+
+            table.AddColumn(new TableColumn("[purple4]Menu[/]").Centered()).Centered();
+            table.Columns[0].Padding(4, 0);
+
+            table.AddRow("1.Sign Up");
+            table.AddRow("2.Sign In");
+            table.AddRow("3.Exit");
+
+            AnsiConsole.Write(table);
+
             return this.menu;
         }
 
         public StringBuilder showUserMenu()
         {
+
+            var table = new Table();
+            table.Border = TableBorder.HeavyHead;
+
+            table.AddColumn(new TableColumn("[purple4]Menu[/]").Centered()).Centered();
+            table.Columns[0].Padding(4, 0);
+
+            table.AddRow("1.Create Playlist");
+            table.AddRow("2.Remove Playlis");
+            table.AddRow("3.Search Playlist");
+            table.AddRow("4.View Playlist");
+            table.AddRow("5.Modify Playlist");
+            table.AddRow("6.Exit");
+
+            AnsiConsole.Write(table);
+
             menu = new StringBuilder();
-            this.menu.AppendLine(" __________________ ");
-            this.menu.AppendLine("|       Menu       |");
-            this.menu.AppendLine("|__________________|");
-            this.menu.AppendLine("|                  |");
-            this.menu.AppendLine("| 1.Create Playlist|");
-            this.menu.AppendLine("| 2.Remove Playlist|");
-            this.menu.AppendLine("| 3.Search Playlist|");
-            this.menu.AppendLine("| 4.View Playlist  |");
-            this.menu.AppendLine("| 5.Modify Playlist|");
-            this.menu.AppendLine("| 6.Exit           |");
-            this.menu.AppendLine("|__________________|");
             return this.menu;
 
         }
@@ -59,16 +85,21 @@ namespace NullSoft
         public StringBuilder showPlaylistOptions(Playlist playlist)
         {
             menu = new StringBuilder();
-            this.menu.AppendLine(" __________________ ");
-            this.menu.AppendLine("|       menu       |");
-            this.menu.AppendLine("|__________________|");
-            this.menu.AppendLine("|                  |");
-            this.menu.AppendLine("| 1.Add song       |");
-            this.menu.AppendLine("| 2.Remove song    |");
-            this.menu.AppendLine("| 3.List all songs |");
-            this.menu.AppendLine("| 4.Change privacy |");
-            this.menu.AppendLine("| 5.Exit           |");
-            this.menu.AppendLine("|__________________|");
+
+            var table = new Table();
+            table.Border = TableBorder.HeavyHead;
+
+            table.AddColumn(new TableColumn("[purple4]Menu[/]").Centered()).Centered();
+            table.Columns[0].Padding(4, 0);
+
+            table.AddRow(" 1.Add song");
+            table.AddRow("2.Remove song ");
+            table.AddRow("3.List all songs");
+            table.AddRow("4.Change privacy ");
+            table.AddRow("5.Exit");
+
+            AnsiConsole.Write(table);
+
             return this.menu;
 
         }
@@ -89,7 +120,7 @@ namespace NullSoft
             }
             catch (Exception e)
             {
-                Console.WriteLine("Error: "+ e.Message);
+                Console.WriteLine("Error: " + e.Message);
             }
             return 0;
         }
@@ -97,42 +128,41 @@ namespace NullSoft
         public StringBuilder RegisterMenu()
         {
             menu = new StringBuilder();
-            Console.WriteLine(" _________________");
-            Console.WriteLine("|  Register menu  |");
-            Console.WriteLine("|-----------------|");
-            Console.WriteLine("|    Username     |");
-            Console.WriteLine("|    ________     |");
-            Console.WriteLine("|                 |");
-            Console.WriteLine("|    Password     |");
-            Console.WriteLine("|    ________     |");
-            Console.WriteLine("|_________________|");
+
+            var table = new Table();
+            table.Border = TableBorder.HeavyHead;
+
+            table.AddColumn(new TableColumn("[purple4]Register menu[/]").Centered()).Centered();
+            table.Columns[0].Padding(4, 0);
+
+            table.AddRow("Username");
+            table.AddRow("________ ");
+            table.AddRow("Password");
+            table.AddRow("________");
+
+            AnsiConsole.Write(table);
 
             Console.WriteLine("Write your username: ");
             String username = Console.ReadLine();
-            Console.WriteLine(" _________________ ");
-            Console.WriteLine("|  Register menu  |");
-            Console.WriteLine("|-----------------|");
-            Console.WriteLine("|    Username     |");
-            Console.WriteLine($"|    {username.PadRight(13)}|");
-            Console.WriteLine("|                 |");
-            Console.WriteLine("|    Password     |");
-            Console.WriteLine("|    ________     |");
-            Console.WriteLine("|_________________|");
+
             Console.WriteLine("Write your password: ");
             String password = writePassw();
-            Console.WriteLine(" ");
-            this.menu.AppendLine(" _________________");
-            this.menu.AppendLine("|  Register menu  |");
-            this.menu.AppendLine("|-----------------|");
-            this.menu.AppendLine("|    Username     |");
-            this.menu.AppendLine($"|    {username.PadRight(13)}|");
-            this.menu.AppendLine("|                 |");
-            this.menu.AppendLine("|    Password     |");
-            this.menu.AppendLine("|    ********     |");
-            this.menu.AppendLine("|_________________|");
-            this.menu.AppendLine("   ");
+
+            var table2 = new Table();
+            table2.Border = TableBorder.HeavyHead;
+
+            table2.AddColumn(new TableColumn("[purple4]Register menu[/]").Centered()).Centered();
+            table2.Columns[0].Padding(4, 0);
+
+            table2.AddRow("Username");
+            table2.AddRow($"{username}");
+            table2.AddRow("Password");
+            table2.AddRow("********");
+
+            AnsiConsole.Write(table2);
+
             userDAO.SerializeUser(new User(username, password));
-            this.menu.AppendLine("Register succesfully");
+            Console.WriteLine("Register succesfully");
             return this.menu;
         }
 
@@ -143,19 +173,20 @@ namespace NullSoft
             String username = Console.ReadLine();
             Console.WriteLine("Password: ");
             String password = writePassw();
-            Console.WriteLine(" ");
-            Console.WriteLine(" _________________");
-            Console.WriteLine("|   Log-in menu   |");
-            Console.WriteLine("|-----------------|");
-            Console.WriteLine("|    Username     |");
-            Console.WriteLine($"|    {username.PadRight(13)}|");
+            var table = new Table();
+            table.Border = TableBorder.HeavyHead;
+
+            table.AddColumn(new TableColumn("[purple4]Log-in menu[/]").Centered()).Centered();
+            table.Columns[0].Padding(4, 0);
+
+            table.AddRow("Username");
+            table.AddRow($"{username}");
+            table.AddRow("Password");
+            table.AddRow("********");
+
+            AnsiConsole.Write(table);
             Thread.Sleep(1500);
-            Console.WriteLine("|                 |");
-            Console.WriteLine("|    Password     |");
-            Console.WriteLine("|    ********     |");
-            Thread.Sleep(1500);
-            Console.WriteLine("|_________________|");
-            Console.WriteLine("   ");
+
             int contador = 0;
             foreach (var item in userDAO.Deserialize())
             {

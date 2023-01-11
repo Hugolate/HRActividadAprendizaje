@@ -11,12 +11,11 @@ namespace Daos
     class UsersDAO
     {
 
-        private static string Path = "DDBB/Users.json";
+        private static string Path = "BBDD/Users.json";
         public List<User> Deserialize()
         {
 
-
-            string jsonString = File.ReadAllText("DDBB/Users.json");
+            string jsonString = File.ReadAllText("BBDD/Users.json");
             if (jsonString != "")
             {
                 return JsonConvert.DeserializeObject<List<User>>(jsonString);
