@@ -120,6 +120,7 @@ namespace NullSoft
             }
             catch (Exception e)
             {
+                Errors.LogError(e);
                 Console.WriteLine("Error: " + e.Message);
             }
             return 0;
@@ -246,6 +247,7 @@ namespace NullSoft
                 }
                 catch (Exception e)
                 {
+                    Errors.LogError(e);
                     Console.WriteLine("Error: " + e.Message);
                 }
                 Boolean priv;

@@ -1,0 +1,10 @@
+Time: 11/01/2023 02:43:32 
+-----------------------------------------------------------
+Message: Input string was not in a correct format.
+StackTrace:    at System.Number.ThrowOverflowOrFormatException(ParsingStatus status, TypeCode type)
+   at System.Convert.ToInt32(String value)
+   at NullSoft.Menu.bucleMenu(Int32 minimo, Int32 maximo, Int32 opcion) in C:\Users\hugo\Desktop\Nueva carpeta (2)\HRActividadAprendizaje\NullSoft\Menu.cs:line 113
+Source: System.Private.CoreLib
+TargetSite: Void ThrowOverflowOrFormatException(ParsingStatus, System.TypeCode)
+-----------------------------------------------------------
+

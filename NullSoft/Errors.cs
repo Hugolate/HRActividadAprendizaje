@@ -6,7 +6,9 @@ using Models;
 
 class Errors
 {
-    private static void LogError(Exception ex)
+
+
+    public static void LogError(Exception ex)
     {
         string message = string.Format("Time: {0}", DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss tt"));
         message += Environment.NewLine;

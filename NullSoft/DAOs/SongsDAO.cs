@@ -12,7 +12,7 @@ class SongsDao
     public List<Song> Deserialize()
     {
        
-        string jsonString = File.ReadAllText("DDBB/Songs.json");
+        string jsonString = File.ReadAllText("BBDD/Songs.json");
         if (jsonString != "")
         {
             return JsonConvert.DeserializeObject<List<Song>>(jsonString, new IsoDateTimeConverter { DateTimeFormat = "yyyy-MM-dd HH:mm:ss" });
